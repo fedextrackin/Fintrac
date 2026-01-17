@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Compliance Verification Forms</title>
+    <style>
+        /* Base Reset and Page Setup */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background: #f5f5f5;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            color: #333;
+        }
+
+        /* Page Break for Printing */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .document-page {
+                box-shadow: none;
+                margin: 0;
+                page-break-after: always;
+                border: 1px solid #000;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        /* Control Bar */
+        .control-bar {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #003366;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .control-bar button {
+            background: #D80621;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .control-bar button:hover {
+            background: #ff0000;
+            transform: translateY(-2px);
+        }
+
+        /* Document Pages */
+        .document-page {
+            background: white;
+            width: 8.5in;
+            height: 11in;
+            margin: 20px auto 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            padding: 1in;
+            overflow: hidden;
+        }
+
+        /* Watermark and Security Features */
+        .watermark {
+            position: absolute;
+            top: 30%;
+            left: 0;
+            width: 100%;
+            font-size: 120px;
+            color: rgba(0, 51, 102, 0.03);
+            text-align: center;
+            transform: rotate(-45deg);
+            pointer-events: none;
+            z-index: 0;
+            white-space: nowrap;
+        }
+
+        .security-line {
+            position: absolute;
+            bottom: 0.5in;
+            left: 1in;
+            right: 1in;
+            height: 1px;
+            background: repeating-linear-gradient(
+                to right,
+                #000,
+                #000 10px,
+                transparent 10px,
+                transparent 20px
+            );
+        }
+
+        .microprint {
+            position: absolute;
+            bottom: 0.3in;
+            left: 1in;
+            right: 1in;
+            font-size: 6px;
+            color: #666;
+            letter-spacing: 1px;
+            text-align: center;
+            font-family: monospace;
+        }
+
+        /* Header Styles */
+        .header {
+            border-bottom: 4px solid #003366;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .flag {
+            height: 20px;
+            background: linear-gradient(to right, 
+                #FF0000 0%, #FF0000 33%, 
+                #FFFFFF 33%, #FFFFFF 67%, 
+                #FF0000 67%, #FF0000 100%);
+            margin-bottom: 15px;
+        }
+
+        .agency-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .agency-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #003366;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-number {
+            text-align: right;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .document-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #003366;
+            margin: 30px 0 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .document-subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        /* Warning and Notice Boxes */
+        .warning-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-left: 8px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .legal-box {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+            border-left: 8px solid #dc3545;
+            padding: 20px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .compliance-box {
+            background: #d1ecf1;
+            border: 2px solid #17a2b8;
+            border-left: 8px solid #17a2b8;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        /* Table Styles */
+        .verification-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 12px;
+        }
+
+        .verification-table th {
+            background: #003366;
+            color: white;
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .verification-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .verification-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        /* Status Indicators */
+        .status-pass {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .status-fail {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .status-pending {
+            color: #ffc107;
+            font-weight: bold;
+        }
+
+        /* Checklist Styles */
+        .checklist {
+            margin: 20px 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            font-size: 14px;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.3);
+        }
+
+        /* Signature Area */
+        .signature-area {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #003366;
+        }
+
+        .signature-line {
+            display: inline-block;
+            width: 300px;
+            height: 1px;
+            background: #000;
+            margin: 30px 0 5px;
+        }
+
+        /* Fee Breakdown */
+        .fee-table {
+            width: 60%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        .fee-table td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .fee-table td:last-child {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .fee-total {
+            border-top: 2px solid #003366;
+            font-size: 16px;
+            color: #003366;
+        }
+
+        /* Scanning Simulation */
+        .scan-simulation {
+            background: #000;
+            color: #0f0;
+            font-family: monospace;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scan-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(transparent 95%, rgba(0, 255, 0, 0.1) 95%),
+                        linear-gradient(90deg, transparent 95%, rgba(0, 255, 0, 0.1) 95%);
+            background-size: 20px 20px;
+            pointer-events: none;
+        }
+
+        .scan-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        .currency-bundle {
+            background: repeating-linear-gradient(
+                45deg,
+                #333,
+                #333 10px,
+                #000 10px,
+                #000 20px
+            );
+            color: #ff0;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #0f0;
+        }
+
+        /* Official Stamps */
+        .official-stamp {
+            position: absolute;
+            bottom: 1in;
+            right: 1in;
+            width: 150px;
+            height: 150px;
+            border: 3px solid #D80621;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(10deg);
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .stamp-text {
+            font-size: 12px;
+            font-weight: bold;
+            color: #D80621;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stamp-inner {
+            border: 2px solid #003366;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* QR Code Placeholder */
+        .qr-container {
+            position: absolute;
+            bottom: 1in;
+            left: 1in;
+            text-align: center;
+        }
+
+        .qr-code {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #333 25%, #666 25%, #666 50%, #333 50%, #333 75%, #666 75%);
+            background-size: 10px 10px;
+            border: 2px solid #003366;
+            margin: 0 auto 10px;
+        }
+
+        /* Form Sections */
+        .section {
+            margin: 25px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #003366;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #003366;
+            padding-bottom: 5px;
+        }
+
+        /* Action Options */
+        .action-options {
+            display: flex;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .action-card {
+            flex: 1;
+            padding: 20px;
+            border: 2px solid #003366;
+            border-radius: 8px;
+            background: #fff;
+        }
+
+        .action-card h3 {
+            color: #003366;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        /* Required Documents List */
+        .documents-list {
+            columns: 2;
+            margin: 20px 0;
+        }
+
+        .documents-list li {
+            margin-bottom: 10px;
+            list-style: none;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .documents-list li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #003366;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px dashed #666;
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+        }
+
+        /* Document Footer */
+        .document-footer {
+            position: absolute;
+            bottom: 0.5in;
+            left: 1in;
+            right: 1in;
+            font-size: 10px;
+            color: #666;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Control Bar -->
+    <div class="control-bar no-print">
+        <div style="margin-bottom: 10px;">Document Controls</div>
+        <button onclick="window.print()">🖨️ Print/Save as PDF</button>
+        <button onclick="generatePNG()">📸 Generate PNG</button>
+        <button onclick="toggleWatermarks()">🔍 Toggle Watermarks</button>
+    </div>
+
+    <!-- DOCUMENT 1: High-Value Cash Shipment Declaration -->
+    <div class="document-page" id="document1">
+        <div class="watermark" id="watermark1">FINTRAC OFFICIAL</div>
+        <div class="security-line"></div>
+        <div class="microprint">FINTRAC-HV1-20240117-001234567890-ABCDEFG-1234567890-9876543210-FEDCBA-0987654321</div>
+        
+        <!-- Header -->
+        <div class="header">
+            <div class="flag"></div>
+            <div class="agency-title">
+                <div class="agency-name">
+                    Financial Transactions and Reports Analysis Centre of Canada<br>
+                    <small style="font-size: 14px; font-weight: normal;">Centre d'analyse des opérations et déclarations financières du Canada</small>
+                </div>
+                <div class="form-number">
+                    Form: FINTRAC-HV1<br>
+                    Revision: 2024-01A<br>
+                    Date: 2026-01-17
+                </div>
+            </div>
+        </div>
+
+        <!-- Document Title -->
+        <div class="document-title">
+            High-Value Cash Shipment Declaration Form
+        </div>
+        <div class="document-subtitle">
+            For cross-border shipments exceeding CAD $10,000 (Equivalent to USD $7,500)
+        </div>
+
+        <!-- Legal Warning -->
+        <div class="legal-box">
+            <strong>⚠️ MANDATORY DECLARATION:</strong> Completion of this form is required under Section 12 of the Proceeds of Crime (Money Laundering) and Terrorist Financing Act (PCMLTFA). Failure to comply may result in penalties up to CAD $500,000 and/or imprisonment.
+        </div>
+
+        <!-- Shipment Details -->
+        <div class="section">
+            <div class="section-title">Shipment Details</div>
+            <table style="width: 100%; font-size: 14px;">
+                <tr>
+                    <td><strong>Tracking Number:</strong></td>
+                    <td style="color: #D80621; font-weight: bold;">FX261008JL</td>
+                    <td><strong>Declared Value:</strong></td>
+                    <td style="color: #D80621; font-weight: bold;">$30,000 USD ($40,215 CAD)</td>
+                </tr>
+                <tr>
+                    <td><strong>Currency Type:</strong></td>
+                    <td>US Dollars</td>
+                    <td><strong>Weight:</strong></td>
+                    <td>4.5 kg</td>
+                </tr>
+                <tr>
+                    <td><strong>Dimensions:</strong></td>
+                    <td>96" x 120" x 72"</td>
+                    <td><strong>Contents:</strong></td>
+                    <td>High-value monetary instruments - Cash</td>
+                </tr>
+                <tr>
+                    <td><strong>Declarant:</strong></td>
+                    <td>Steven Venditti</td>
+                    <td><strong>Recipient Address:</strong></td>
+                    <td>32 Rory Road, Toronto, Ontario M6L 3G2</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Cash Processing Verification -->
+        <div class="section">
+            <div class="section-title">Cash Processing Verification Checklist</div>
+            <table class="verification-table">
+                <tr>
+                    <th>Verification Check</th>
+                    <th>Status</th>
+                    <th>Details</th>
+                </tr>
+                <tr>
+                    <td>Currency Authentication (UV Scanning)</td>
+                    <td class="status-pass">✓ PASSED</td>
+                    <td>All bills genuine</td>
+                </tr>
+                <tr>
+                    <td>Magnetic Ink Detection</td>
+                    <td class="status-pass">✓ PASSED</td>
+                    <td>Magnetic strips verified</td>
+                </tr>
+                <tr>
+                    <td>Holographic Verification</td>
+                    <td class="status-pass">✓ PASSED</td>
+                    <td>Security features confirmed</td>
+                </tr>
+                <tr>
+                    <td>Sequential Serial Number Recording</td>
+                    <td class="status-pass">✓ PASSED</td>
+                    <td>Serial numbers recorded</td>
+                </tr>
+                <tr>
+                    <td>Weight/Volume Verification</td>
+                    <td class="status-pass">✓ PASSED</td>
+                    <td>4.5 kg confirmed</td>
+                </tr>
+                <tr>
+                    <td>FINTRAC CTR Database Cross-Reference</td>
+                    <td class="status-fail">✗ FAILED</td>
+                    <td>Source verification required</td>
+                </tr>
+                <tr>
+                    <td>Source of Funds Verification</td>
+                    <td class="status-fail">✗ FAILED</td>
+                    <td>Documentation incomplete</td>
+                </tr>
+                <tr>
+                    <td>Tax Compliance Check</td>
+                    <td class="status-pending">⚠️ PENDING</td>
+                    <td>Awaiting documentation</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Required Documentation -->
+        <div class="section">
+            <div class="section-title">Required Documentation</div>
+            <div class="checklist">
+                <div class="checklist-item">
+                    <input type="checkbox" id="doc1" disabled>
+                    <label for="doc1">Form FINTRAC-HV1 - Declaration of Source of Funds</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="doc2" disabled>
+                    <label for="doc2">Form CBSA-E29 - Purpose of International Monetary Receipt</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="doc3" disabled checked>
+                    <label for="doc3">Government Issued Photo ID (Passport/Driver's License)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="doc4" disabled>
+                    <label for="doc4">Proof of Address (Utility Bill/Bank Statement within 90 days)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="doc5" disabled>
+                    <label for="doc5">Last 2 Years Tax Returns (CRA/IRS)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="doc6" disabled>
+                    <label for="doc6">Proof of Legitimate Source of Funds</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="doc7" disabled>
+                    <label for="doc7">Commercial Invoice/Purchase Agreement</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Compliance Fee Notice -->
+        <div class="compliance-box">
+            <div style="text-align: center; margin-bottom: 15px;">
+                <h3 style="color: #D80621;">COMPLIANCE PROCESSING FEE: CAD $150.00</h3>
+            </div>
+            <div style="font-size: 14px;">
+                <p><strong>Required for:</strong></p>
+                <ul style="margin-left: 20px;">
+                    <li>Government Regulatory Compliance Processing</li>
+                    <li>Monetary Disbursement Verification</li>
+                    <li>FINTRAC Reporting Fee</li>
+                    <li>CBSA Administrative Handling</li>
+                    <li>Security Clearance Processing</li>
+                </ul>
+                <p style="margin-top: 10px;"><strong>Note:</strong> Payment must be received before shipment can be released for delivery.</p>
+            </div>
+        </div>
+
+        <!-- Fee Breakdown -->
+        <div class="section">
+            <div class="section-title">Fee Breakdown</div>
+            <table class="fee-table">
+                <tr>
+                    <td>FINTRAC Processing Fee</td>
+                    <td>$65.00 CAD</td>
+                </tr>
+                <tr>
+                    <td>CBSA Administrative Charge</td>
+                    <td>$45.00 CAD</td>
+                </tr>
+                <tr>
+                    <td>Monetary Verification Fee</td>
+                    <td>$25.00 CAD</td>
+                </tr>
+                <tr>
+                    <td>Security Screening</td>
+                    <td>$15.00 CAD</td>
+                </tr>
+                <tr class="fee-total">
+                    <td><strong>TOTAL</strong></td>
+                    <td><strong>$150.00 CAD</strong></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Signature Area -->
+        <div class="signature-area">
+            <div style="margin-bottom: 20px;">
+                <p><strong>DECLARATION:</strong> I hereby declare that the information provided in this form is true, accurate and complete to the best of my knowledge. I understand the legal implications of providing false information under the PCMLTFA.</p>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; margin-top: 30px;">
+                <div>
+                    <div class="signature-line"></div>
+                    <div style="font-size: 12px; color: #666;">Signature of Declarant</div>
+                </div>
+                
+                <div>
+                    <div class="signature-line"></div>
+                    <div style="font-size: 12px; color: #666;">Date</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 40px;">
+                <div class="signature-line" style="width: 250px;"></div>
+                <div style="font-size: 12px; color: #666;">CBSA Officer Signature & Badge Number</div>
+            </div>
+        </div>
+
+        <!-- Official Stamp -->
+        <div class="official-stamp">
+            <div class="stamp-inner">
+                <div class="stamp-text">Registered MSB</div>
+                <div style="font-size: 16px; color: #D80621; margin: 5px 0;">★</div>
+                <div class="stamp-text">F-1234567</div>
+                <div class="stamp-text" style="font-size: 10px; margin-top: 5px;">Issued: 2024-01-17</div>
+            </div>
+        </div>
+
+        <!-- QR Code -->
+        <div class="qr-container">
+            <div class="qr-code"></div>
+            <div style="font-size: 9px; color: #666;">SCAN TO VERIFY<br>FINTRAC-HV1-001</div>
+        </div>
+
+        <!-- Footer -->
+        <div class="document-footer">
+            FINTRAC Headquarters: 24th Floor, 234 Laurier Avenue West, Ottawa, ON K1P 1H7 | Phone: 1-866-346-8722 | Website: fintrac-canafe.gc.ca
+        </div>
+    </div>
+
+    <!-- DOCUMENT 2: Compliance Verification Report -->
+    <div class="document-page" id="document2">
+        <div class="watermark" id="watermark2">VERIFICATION PENDING</div>
+        <div class="security-line"></div>
+        <div class="microprint">CBSA-E29-20240117-001-FX261008JL-30000USD-40215CAD-YYZ-TOR-SECTION12-PCMLTFA-2026-01-17</div>
+        
+        <!-- Header -->
+        <div class="header">
+            <div class="flag"></div>
+            <div class="agency-title">
+                <div class="agency-name">
+                    Canada Border Services Agency<br>
+                    <small style="font-size: 14px; font-weight: normal;">Agence des services frontaliers du Canada</small>
+                </div>
+                <div class="form-number">
+                    Form: CBSA-E29<br>
+                    Reference: FX261008JL-CVR-20260117<br>
+                    Date: 2026-01-17
+                </div>
+            </div>
+        </div>
+
+        <!-- Document Title -->
+        <div class="document-title">
+            Compliance Verification Report & Pickup Authorization
+        </div>
+        <div class="document-subtitle">
+            FedEx Customs & High-Value Clearance Division
+        </div>
+
+        <!-- Package Scanning Simulation -->
+        <div class="section">
+            <div class="section-title">Package Scanning Simulation Results</div>
+            <div class="scan-simulation">
+                <div class="scan-grid"></div>
+                <div class="scan-text">
+                    <div style="text-align: center; font-size: 16px; color: #0f0; margin-bottom: 15px;">
+                        ⚠️ HIGH VALUE CASH DETECTED
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 20px;">
+                        <div>
+                            <div style="color: #ff0; font-size: 12px; margin-bottom: 10px;">X-RAY SCAN VIEW:</div>
+                            <div class="currency-bundle">
+                                ████████████<br>
+                                █ USD $100 █<br>
+                                ████████████<br>
+                                Serial: AB12345678
+                            </div>
+                            <div class="currency-bundle">
+                                ████████████<br>
+                                █ USD $100 █<br>
+                                ████████████<br>
+                                Serial: CD87654321
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div style="color: #ff0; font-size: 12px; margin-bottom: 10px;">SCAN ANALYSIS:</div>
+                            <div style="font-size: 11px; line-height: 1.4;">
+                                <div>> Scanning complete: 2026-01-17 08:45 EST</div>
+                                <div>> Detected: 300 x $100 USD banknotes</div>
+                                <div>> Security strips: VERIFIED</div>
+                                <div>> Magnetic ink: POSITIVE</div>
+                                <div>> Holograms: DETECTED</div>
+                                <div>> Explosive trace: NEGATIVE</div>
+                                <div>> Radiation: NORMAL</div>
+                                <div>> Weight verification: MATCH</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Non-Compliance Notice -->
+        <div class="legal-box" style="background: #f8d7da; border-left: 8px solid #dc3545;">
+            <div style="text-align: center; font-size: 18px; color: #dc3545; margin-bottom: 15px;">
+                ⚠️ VERIFICATION INCOMPLETE - ADDITIONAL REQUIREMENTS
+            </div>
+            <div style="font-size: 14px;">
+                <p><strong>The following compliance checks failed or require additional verification:</strong></p>
+                <ol style="margin-left: 20px; margin-top: 10px;">
+                    <li>Source of Funds documentation insufficient or incomplete</li>
+                    <li>Tax compliance proof not provided or incomplete</li>
+                    <li>Recipient identity requires in-person verification</li>
+                    <li>FINTRAC Form HV1 partially completed</li>
+                    <li>Purpose of transaction documentation missing</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Government Regulation Reference -->
+        <div class="compliance-box">
+            <div class="section-title">Government Regulation Reference</div>
+            <div style="font-size: 12px; font-style: italic; padding: 15px; background: #e8f4f8;">
+                "As per FINTRAC Regulation 12(1) and CBSA Memorandum D19-7-1, Section 5.2:<br><br>
+                High-value cash shipments exceeding CAD $10,000 require:<br>
+                a) Complete source of funds declaration with supporting evidence<br>
+                b) Tax compliance verification for the previous two fiscal years<br>
+                c) Recipient identity confirmation through in-person verification<br>
+                d) Payment of government compliance fee for extended processing<br>
+                e) Completion of all mandatory FINTRAC and CBSA declaration forms"
+            </div>
+        </div>
+
+        <!-- Required Action Section -->
+        <div class="section">
+            <div class="section-title">Required Action - Choose One Option</div>
+            
+            <div class="action-options">
+                <!-- Option A -->
+                <div class="action-card">
+                    <h3>OPTION A</h3>
+                    <p style="font-size: 14px; margin-bottom: 15px;">
+                        <strong>In-Person Pickup with Documentation</strong>
+                    </p>
+                    <div style="font-size: 12px; margin-bottom: 20px;">
+                        <p>1. <strong>Visit:</strong> FedEx High-Value Clearance Centre<br>
+                           3700 McNicoll Ave, Scarborough, ON M1X 0A4</p>
+                        <p>2. <strong>Bring:</strong> All required original documents + Government photo ID</p>
+                        <p>3. <strong>Process:</strong> Sign pickup authorization form + verification interview</p>
+                        <p>4. <strong>Time:</strong> Allow 45-60 minutes for processing</p>
+                        <p>5. <strong>Fee:</strong> No additional fee for in-person pickup</p>
+                    </div>
+                    <div style="background: #f8f9fa; padding: 10px; border-radius: 4px;">
+                        <strong>Required Documents:</strong>
+                        <div class="documents-list">
+                            <li>Passport/Driver's License</li>
+                            <li>Proof of Address</li>
+                            <li>Tax Returns (2 years)</li>
+                            <li>Source of Funds Proof</li>
+                            <li>Purchase Agreement</li>
+                            <li>Bank Statements</li>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Option B -->
+                <div class="action-card">
+                    <h3>OPTION B</h3>
+                    <p style="font-size: 14px; margin-bottom: 15px;">
+                        <strong>Authorize Extended Verification (CAD $150)</strong>
+                    </p>
+                    <div style="font-size: 12px; margin-bottom: 20px;">
+                        <p>1. <strong>Pay:</strong> CAD $150 compliance processing fee</p>
+                        <p>2. <strong>Submit:</strong> Complete all forms electronically</p>
+                        <p>3. <strong>Authorization:</strong> Sign extended verification authorization</p>
+                        <p>4. <strong>Processing:</strong> 24-48 hours for government verification</p>
+                        <p>5. <strong>Delivery:</strong> Scheduled after clearance obtained</p>
+                    </div>
+                    <div style="background: #f8f9fa; padding: 10px; border-radius: 4px; text-align: center;">
+                        <div style="font-size: 24px; color: #D80621; font-weight: bold;">
+                            CAD $150.00
+                        </div>
+                        <div style="font-size: 11px; color: #666;">
+                            Government Compliance Fee
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Authorization Form -->
+        <div class="section">
+            <div class="section-title">Authorization Form</div>
+            <div style="font-size: 14px; margin-bottom: 20px;">
+                <p>Please select your preferred option and sign below:</p>
+            </div>
+            
+            <div class="checklist" style="margin-bottom: 30px;">
+                <div class="checklist-item">
+                    <input type="checkbox" id="option1">
+                    <label for="option1"><strong>I authorize payment of CAD $150 for extended verification and government compliance processing</strong></label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="option2">
+                    <label for="option2"><strong>I will present all required documentation in person at the clearance facility for verification</strong></label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="option3">
+                    <label for="option3"><strong>I understand that incomplete documentation may result in shipment seizure under Section 74 of PCMLTFA</strong></label>
+                </div>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; margin-top: 40px;">
+                <div>
+                    <div class="signature-line"></div>
+                    <div style="font-size: 12px; color: #666;">Signature of Recipient</div>
+                </div>
+                
+                <div>
+                    <div class="signature-line"></div>
+                    <div style="font-size: 12px; color: #666;">Date</div>
+                </div>
+                
+                <div>
+                    <div class="signature-line" style="width: 150px;"></div>
+                    <div style="font-size: 12px; color: #666;">Witness Signature</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="contact-info">
+            <strong>For Assistance Contact:</strong><br>
+            FedEx High-Value Clearance Division: 1-800-463-3339 (Option 4) • 
+            FINTRAC Reporting Centre: 1-866-346-8722 • 
+            CBSA Commercial Operations: 1-800-461-9999<br>
+            Hours: Monday-Friday 8:00 AM - 8:00 PM EST • Email: clearance@fedex.customs.ca
+        </div>
+
+        <!-- Official Stamps -->
+        <div class="official-stamp" style="right: 1in; bottom: 1.5in; border-color: #003366;">
+            <div class="stamp-inner" style="border-color: #D80621;">
+                <div class="stamp-text">CBSA</div>
+                <div style="font-size: 16px; color: #003366; margin: 5px 0;">✪</div>
+                <div class="stamp-text">AUTHORIZED</div>
+                <div class="stamp-text" style="font-size: 10px; margin-top: 5px;">CB-HV2024-889</div>
+            </div>
+        </div>
+
+        <div class="official-stamp" style="right: 3in; bottom: 1.5in; width: 120px; height: 120px; border-color: #666; transform: rotate(-5deg);">
+            <div class="stamp-inner" style="width: 100px; height: 100px; border-color: #666;">
+                <div class="stamp-text" style="font-size: 10px;">RECEIVED</div>
+                <div style="font-size: 12px; color: #666; margin: 3px 0;">✗</div>
+                <div class="stamp-text" style="font-size: 9px;">2026-01-17</div>
+                <div class="stamp-text" style="font-size: 8px; margin-top: 2px;">08:45 EST</div>
+            </div>
+        </div>
+
+        <!-- Barcode -->
+        <div class="qr-container" style="left: 1in; bottom: 1.5in;">
+            <div style="font-family: monospace; font-size: 16px; letter-spacing: 8px; margin-bottom: 5px;">
+                ||| || || | ||||| || | |||| |
+            </div>
+            <div style="font-size: 9px; color: #666;">
+                FEDEX-HV-20260117-001
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="document-footer">
+            This document is protected under the Privacy Act and Official Secrets Act. Unauthorized reproduction or distribution is prohibited.
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for document controls
+        function generatePNG() {
+            alert("To generate PNG images:\n\n1. Click 'Print/Save as PDF'\n2. In the print dialog, select 'Save as PDF'\n3. Convert PDF to PNG using any online converter\n\nAlternatively, take screenshots of each document.");
+        }
+
+        function toggleWatermarks() {
+            const watermarks = document.querySelectorAll('.watermark');
+            watermarks.forEach(wm => {
+                wm.style.display = wm.style.display === 'none' ? 'block' : 'none';
+            });
+        }
+
+        // Auto-check some boxes for demonstration
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check some boxes in document 2
+            document.getElementById('option2').checked = true;
+            document.getElementById('option3').checked = true;
+            
+            // Add today's date
+            const today = new Date().toISOString().split('T')[0];
+            const dateElements = document.querySelectorAll('.form-number');
+            dateElements.forEach(el => {
+                if (el.textContent.includes('Date:')) {
+                    el.innerHTML = el.innerHTML.replace('2026-01-17', today);
+                }
+            });
+        });
+
+        // Print optimization
+        window.onbeforeprint = function() {
+            document.querySelectorAll('.no-print').forEach(el => {
+                el.style.display = 'none';
+            });
+        };
+
+        window.onafterprint = function() {
+            document.querySelectorAll('.no-print').forEach(el => {
+                el.style.display = 'block';
+            });
+        };
+    </script>
+</body>
+</html>
